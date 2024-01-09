@@ -28,11 +28,22 @@ Example: sh restate-sync.sh genesisd .genesis 1000 "https://26657.genesisl1.org:
 > [!CAUTION]
 > **The node's /data folder will get wiped using `<BINARY_NAME> tendermint unsafe-reset-all`!**
 >
-> While it does create a backup of the _priv_validator_state.json_ file and tries to stop the node service, we encourage you to make a backup and stop it yourself in case of the small chance of your setup _or_ chain differing from the _norm_. Rest assured, the script will tell exactly what will happen and will ask if you agree to continue.
+> While it does create a backup of the _priv_validator_state.json_ file and tries to stop the node service, we encourage you to make a backup and stop it yourself in case of the small chance of your setup _or_ chain differing from the _norm_.
+>
+> Yet, rest assured, the script will tell exactly what will happen and will ask if you agree to continue, example:
+> ```
+> WARNING: - State-syncing will wipe the /root/.genesis/data folder.
+>          - A backup and restore of /root/.genesis/data/priv_validator_state.json will be performed.
+>          - Service 'genesisd' will get halted using 'systemctl stop genesisd'.
+> 
+> If any of this doesn't match your setup, make sure to halt and/or backup the node yourself first!
+> 
+> Do you want to continue? (y/N): 
+> ```
 
 ## Cronjob idea
 
-Something for later down the line _or_ something you could create is a cronjob that periodically checks the size of the node directory and runs the [restate-sync.sh](restate-sync.sh) script whenever a certain threshold (in GBs) gets surpassed.
+Something for later down the line _or_ something you could create is a cronjob that periodically checks the size of the node directory and runs the [restate-sync.sh](restate-sync.sh) script whenever a certain threshold (in GBs) gets met.
 
 </br>
 
