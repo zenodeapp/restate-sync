@@ -28,9 +28,9 @@ Example: sh restate-sync.sh genesisd .genesis 1000 "https://26657.genesisl1.org:
 > [!CAUTION]
 > **The node's /data folder will get wiped using `<BINARY_NAME> tendermint unsafe-reset-all`!**
 >
-> While it does create a backup of the _priv_validator_state.json_ file and tries to stop the node service, we encourage you to make a backup and stop it yourself in case of the small chance of your setup _or_ chain differing from the _norm_.
+> While it does create a backup of the _priv_validator_state.json_ file and tries to stop the node service, we encourage you to make a backup and stop it yourself in case of the small chance of your setup _or_ chain differing from the _norm_. Yet, rest assured, the script will tell you exactly what will happen and asks whether you agree to continue.
 >
-> Yet, rest assured, the script will tell exactly what will happen and will ask if you agree to continue, example:
+> **An example (using `sh restate-sync.sh genesisd .genesis`):**
 > ```
 > WARNING: - State-syncing will wipe the /root/.genesis/data folder.
 >          - A backup and restore of /root/.genesis/data/priv_validator_state.json will be performed.
