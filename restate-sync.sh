@@ -67,7 +67,7 @@ fi
 
 # Query block height data
 LATEST_HEIGHT=$(curl -s $RPC_SERVER_1/block | jq -r .result.block.header.height)
-TRUST_HEIGHT=$((LATEST_HEIGHT - $HEIGHT_INTERVAL))
+TRUST_HEIGHT=$(( ((LATEST_HEIGHT - HEIGHT_INTERVAL) / HEIGHT_INTERVAL) * HEIGHT_INTERVAL )) # This makes sure we round to the nearest multiple of HEIGHT_INTERVAL
 TRUST_HASH=$(curl -s "$RPC_SERVER_1/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash)
 
 if [ "$TRUST_HEIGHT" -le 0 ]; then
