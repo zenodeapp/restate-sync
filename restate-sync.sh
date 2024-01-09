@@ -22,6 +22,8 @@ if [ -z "$1" ] || [ -z "$2" ]; then
     exit 1
 fi
 
+echo ""
+
 BINARY_NAME=$1
 NODE_DIR=$2
 NODE_PATH=$HOME/$NODE_DIR
@@ -49,8 +51,11 @@ else
     RPC_SERVER_PROVIDED=true
 fi
 
-echo "WARNING: State-syncing will wipe the $DATA_PATH folder (a backup of priv_validator_state.json will be made though)."
-echo "Service $BINARY_NAME will get halted using systemctl stop $BINARY_NAME, if this doesn't match your setup, make sure to halt the node yourself first!"
+echo "WARNING: - State-syncing will wipe the $DATA_PATH folder."
+echo "         - A backup and restore of $DATA_PATH/priv_validator_state.json will be performed."
+echo "         - Service '$BINARY_NAME' will get halted using 'systemctl stop $BINARY_NAME'."
+echo ""
+echo "If any of this doesn't match your setup, make sure to halt and/or backup the node yourself first!"
 echo ""
 read -p "Do you want to continue? (y/N): " ANSWER
 ANSWER=$(echo "$ANSWER" | tr 'A-Z' 'a-z')  # Convert to lowercase
