@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # STATE-SYNC REFRESHER for Tendermint or CometBFT-based protocols.
 # https://github.com/zenodeapp/restate-sync
 # ZENODE (https://zenode.app)
