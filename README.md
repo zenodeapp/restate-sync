@@ -25,21 +25,30 @@ Example: sh restate-sync.sh genesisd .genesis 1000 "https://26657.genesisl1.org:
   [RPC_SERVER_2] is optional (default: [RPC_SERVER_1]).
 ```
 
+### Data wipe
+
 > [!CAUTION]
-> **The node's /data folder will get wiped using `<BINARY_NAME> tendermint unsafe-reset-all`!**
->
-> While it does create a backup of the _priv_validator_state.json_ file and tries to stop the node service, we encourage you to make a backup and stop it yourself in case of the small chance of your setup _or_ chain differing from the _norm_. Yet, rest assured, the script will tell you exactly what will happen and asks whether you agree to continue.
->
-> **An example (using `sh restate-sync.sh genesisd .genesis`):**
-> ```
-> WARNING: - State-syncing will wipe the /root/.genesis/data folder.
->          - A backup and restore of /root/.genesis/data/priv_validator_state.json will be performed.
->          - Service 'genesisd' will get halted using 'systemctl stop genesisd'.
-> 
-> If any of this doesn't match your setup, make sure to halt and/or backup the node yourself first!
-> 
-> Do you want to continue? (y/N): 
-> ```
+> The node's **data-folder will get wiped** using `<BINARY_NAME> tendermint unsafe-reset-all`!
+
+While it does try to stop the node service, create a backup of and restores the _priv_validator_state.json_ file, we encourage you to stop it yourself and create a backup in case of the small chance your setup _or_ chain differs from the _norm_. Though, rest assured, the script will tell you exactly what will happen before it does anything reckless.
+
+Here follows an example warning message when one runs `sh restate-sync.sh genesisd .genesis`:
+```
+WARNING: - State-syncing will wipe the /root/.genesis/data folder.
+         - A backup and restore of /root/.genesis/data/priv_validator_state.json will be performed.
+         - Service 'genesisd' will get halted using 'systemctl stop genesisd'.
+
+If any of this doesn't match your setup, make sure to halt and/or backup the node yourself first!
+
+Do you want to continue? (y/N): 
+```
+
+### Breaking the two RPC server limit
+
+> [!TIP]
+> If you want to add more than two RPCs, then **manually configure the rpc_servers-field** and **leave [RPC_SERVER_1] and [RPC_SERVER_2] blank**.
+
+This script is limited to setting two RPC URIs in the `rpc_servers`-field of your config.toml file. If you want to add more, then manually add the RPC URIs in your config.toml file and do not call the script with either of the `[RPC_SERVER_1]` or `[RPC_SERVER_2]` arguments. This will let the script parse the first rpc server frm the `rpc_servers`-field, uses this to query the latest block height _and_ leaves the field untouched.
 
 ## Cronjob idea
 
