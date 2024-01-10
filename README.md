@@ -34,11 +34,11 @@ While it does try to stop the node service, create a backup of and restores the 
 
 Here follows an example warning message when one runs `sh restate-sync.sh genesisd .genesis`:
 ```
-WARNING: - State-syncing will wipe the /root/.genesis/data folder.
+WARNING: - Service 'genesisd' will get halted using 'systemctl stop genesisd'.
          - A backup and restore of /root/.genesis/data/priv_validator_state.json will be performed.
-         - Service 'genesisd' will get halted using 'systemctl stop genesisd'.
+         - State-syncing will wipe the /root/.genesis/data folder.
 
-If any of this doesn't match your setup, make sure to halt and/or backup the node yourself first!
+If any of this doesn't match your setup, make sure to halt and/or backup the node yourself before continuing!
 
 Do you want to continue? (y/N): 
 ```
