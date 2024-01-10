@@ -5,17 +5,18 @@
 # ZENODE (https://zenode.app)
 
 # This script will refresh the state sync of your node by setting the
-# configuration for state-sync to LATEST_HEIGHT-HEIGHT_INTERVAL.
-# This also makes a backup of the priv_validator_state.json file,
-# but it does wipe your entire /data folder!
+# configuration for state-sync to LATEST_HEIGHT - HEIGHT_INTERVAL and
+# rounds it to the nearest multiple of HEIGHT_INTERVAL. The code makes
+# sure to backup and restore the priv_validator_state.json file, before
+# it wipes the entire /data folder.
 
 if [ -z "$1" ] || [ -z "$2" ]; then
     echo ""
     echo "Usage:   sh $0 <BINARY_NAME> <NODE_DIR> [HEIGHT_INTERVAL] [RPC_SERVER_1] [RPC_SERVER_2]"
     echo ""
     echo "Example: sh $0 genesisd .genesis 1000 \"https://26657.genesisl1.org:443\""
-    echo "         This will refresh the state sync using a trust height of LATEST_BLOCK - 1000 and"
-    echo "         sets the RPC server addresses to https://26657.genesisl1.org:443"
+    echo "         This will refresh the state sync using a trust height of LATEST_BLOCK - 1000 (rounded)"
+    echo "         and ets the RPC server addresses to https://26657.genesisl1.org:443"
     echo ""
     echo "  <NODE_DIR> should only be the name of the node directory, not a path (e.g. .gaia, .genesis, .cronos, .osmosisd etc.)."
     echo "  [HEIGHT_INTERVAL] is optional (default: 2000)."
@@ -53,11 +54,11 @@ else
     RPC_SERVER_PROVIDED=true
 fi
 
-echo "WARNING: - State-syncing will wipe the $DATA_PATH folder."
+echo "WARNING: - Service '$BINARY_NAME' will get halted using 'systemctl stop $BINARY_NAME'."
 echo "         - A backup and restore of $DATA_PATH/priv_validator_state.json will be performed."
-echo "         - Service '$BINARY_NAME' will get halted using 'systemctl stop $BINARY_NAME'."
+echo "         - State-syncing will wipe the $DATA_PATH folder."
 echo ""
-echo "If any of this doesn't match your setup, make sure to halt and/or backup the node yourself first!"
+echo "If any of this doesn't match your setup, make sure to halt and/or backup the node yourself before continuing!"
 echo ""
 read -p "Do you want to continue? (y/N): " ANSWER
 ANSWER=$(echo "$ANSWER" | tr 'A-Z' 'a-z')  # Convert to lowercase
