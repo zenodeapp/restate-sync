@@ -46,7 +46,7 @@ Do you want to continue? (y/N):
 ### Breaking the two RPC server limit
 
 > [!TIP]
-> If you want to add more than two RPCs, then **manually configure the rpc_servers-field** and **leave [rpc_server_1] and [rpc_server_2] blank**.
+> If you want to add more than two RPCs, then **manually configure the rpc_servers-field in your config.toml** and **leave [rpc_server_1] and [rpc_server_2] blank**.
 
 This script is limited to setting two RPC URIs in the `rpc_servers`-field of your config.toml file. If you want to add more, then manually add the RPC URIs in your config.toml file and do not call the script with either of the `[rpc_server_1]` or `[rpc_server_2]` arguments. This will let the script parse the first rpc server frm the `rpc_servers`-field, uses this to query the latest block height _and_ leaves the field untouched.
 
