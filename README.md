@@ -16,8 +16,8 @@ But, even a state-synced node could eventually become too large in size. This sm
 Usage:   sh restate-sync.sh <BINARY_NAME> <NODE_DIR> [HEIGHT_INTERVAL] [RPC_SERVER_1] [RPC_SERVER_2]
 
 Example: sh restate-sync.sh genesisd .genesis 1000 "https://26657.genesisl1.org:443"
-         This will refresh the state sync using a trust height of LATEST_BLOCK - 1000 and
-         sets the RPC server addresses to https://26657.genesisl1.org:443
+         This will refresh the state sync using a trust height of LATEST_BLOCK - 1000 (rounded)
+         and sets the RPC server addresses to https://26657.genesisl1.org:443
 
   <NODE_DIR> should only be the name of the node directory, not a path (e.g. .gaia, .genesis, .cronos, .osmosisd etc.).
   [HEIGHT_INTERVAL] is optional (default: 2000).
