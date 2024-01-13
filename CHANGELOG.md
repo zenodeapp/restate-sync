@@ -2,9 +2,7 @@
 
 ## v1.0.0 - 2024-01-13
 
-First release of **Restate Sync**.
-
-This version should work with any Tendermint- or CometBFT based protocol as long as the format of the **[statesync]** settings in the _config.toml_-file is:
+First release of **Restate Sync**. This version should work with any Tendermint- or CometBFT based protocol as long as the format of the **[statesync]** settings in the _config.toml_-file is:
 
 ```
 [statesync]
