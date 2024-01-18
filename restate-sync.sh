@@ -69,9 +69,9 @@ if [ "$ANSWER" != "y" ]; then
 fi
 
 # Query block height data
-LATEST_HEIGHT=$(curl -s $RPC_SERVER_1/block | jq -r .result.block.header.height)
+LATEST_HEIGHT=$(wget -qO- $RPC_SERVER_1/block | jq -r .result.block.header.height)
 TRUST_HEIGHT=$(( ((LATEST_HEIGHT - HEIGHT_INTERVAL) / HEIGHT_INTERVAL) * HEIGHT_INTERVAL )) # This makes sure we round to the nearest multiple of HEIGHT_INTERVAL
-TRUST_HASH=$(curl -s "$RPC_SERVER_1/block?height=$TRUST_HEIGHT" | jq -r .result.block_id.hash)
+TRUST_HASH=$(wget -qO- "$RPC_SERVER_1/block?height=$TRUST_HEIGHT" | jq -r .result.block_id.hash)
 
 if [ "$TRUST_HEIGHT" -le 0 ]; then
   echo "Error: trust_height cannot be less than or equal to zero. Your [TRUST_HEIGHT] might be too large for the current state of the blockchain or there is something wrong with the RPC server(s)."
