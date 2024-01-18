@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.0.1 - 2024-01-18
+
+Minor change to keep the usage of dependencies consistent throughout my repositories.
+
+### Changes
+- [restate-sync.sh](restate-sync.sh); made use of `wget` instead of `curl`.
+  
 ## v1.0.0 - 2024-01-13
 
 First release of **Restate Sync**. This version should work with any Tendermint- or CometBFT based protocol as long as the format of the **[statesync]** settings in the _config.toml_-file is:
